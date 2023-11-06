@@ -29,9 +29,9 @@ public class UserService {
   public User getUserById(Long id) {
     return userRepository.findById(id).orElse(null);
   }
-  
-  // Dto es un objeto que se usa para transferir datos entre procesos
-  // En este caso, se usa para transferir datos entre el controlador y el servicio
+
+  // UserDto es un Usuario con solo usuario y contraseña
+  // User es un Usuario con usuario, contraseña y mas informacion
   public UserDto createUser(UserDto userDto) {
     User user = new User();
     user.setUsername(userDto.getUsername());
