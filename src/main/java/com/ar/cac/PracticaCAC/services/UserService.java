@@ -8,16 +8,15 @@ import org.springframework.stereotype.Service;
 
 import com.ar.cac.PracticaCAC.entities.User;
 import com.ar.cac.PracticaCAC.entities.dtos.UserDto;
+import com.ar.cac.PracticaCAC.mappers.UserMapper;
 import com.ar.cac.PracticaCAC.repositories.UserRepository;
 
 @Service
 public class UserService {
 
-  // @Autowired
-  // Autowired no es requerido en este caso, ya que se está usando un constructor
-  // para inyectar la dependencia
   private UserRepository userRepository;
-
+  
+  @Autowired
   public UserService(UserRepository userRepository) {
     this.userRepository = userRepository;
   }
@@ -33,13 +32,9 @@ public class UserService {
   // UserDto es un Usuario con solo usuario y contraseña
   // User es un Usuario con usuario, contraseña y mas informacion
   public UserDto createUser(UserDto userDto) {
-    User user = new User();
-    user.setUsername(userDto.getUsername());
-    user.setPassword(userDto.getPassword());
+    User user = UserMapper.userDtoToUser(userDto);
     userRepository.save(user);
     return userDto;
   }
-
-  
 
 }
